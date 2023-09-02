@@ -15,6 +15,6 @@ class Department extends Model
 
     public function employee()
     {
-        return $this->hasMany(Employee::class)->withTrashed();
+        return $this->hasMany(Employee::class);
     }
 }

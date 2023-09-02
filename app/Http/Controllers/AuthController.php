@@ -19,7 +19,7 @@ class AuthController extends Controller
         ]);
 
         if (!$validator->fails()) {
-            $user = User::where('users', $request->input('username'))->first();
+            $user = User::where('username', $request->input('username'))->first();
             if(!$user){
                 return response()->json([
                     'message' => 'Wrong username or password.',

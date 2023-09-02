@@ -48,13 +48,12 @@
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
-                                <th></th>
-                                <th>Products</th>
-                                <th>Color</th>
-                                <th>Sizes</th>
-                                <th>Price</th>
-                                <th>Quantity</th>
-                                <th>Order</th>
+                                <th>ID</th>
+                                <th>Emp_name</th>
+                                <th>Emp_BirthDate</th>
+                                <th>Emp_salary</th>
+                                <th>Dept_id</th>
+                                <th>Status</th>
                                 <th>Created At</th>
                                 <th>Update At</th>
                                 <th>Settings</th>
@@ -62,35 +61,23 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($products as $product)
+                            @foreach ($employees as $employee)
                                 <tr>
-                                    <td class="align-middle white-space-nowrap py-0">
-                                        <img src="{{ Storage::url($product->image) }}" alt="Product-image" width="53"
-                                            style="border-radius: 10px;">
-                                    </td>
-                                    <td>{{ $product->name }}</td>
-                                    <td class="color-grid">
-                                        @foreach ($product->colors as $color)
-                                            <span class="color-box" style="background-color: {{ $color }}"></span>
-                                        @endforeach
-                                    </td>
-                                    <td>
-                                        @foreach ($product->sizes as $size)
-                                            <span class="badge bg-warning" style="color: #fff; font-size: 16px;">{{ $size }}</span>
-                                        @endforeach
-                                    </td>
-                                    <td>{{ $product->price }}</td>
-                                    <td>{{ $product->quantity }}</td>
-                                    <td>0 orders</td>
-                                    <td>{{ $product->created_at }}</td>
-                                    <td>{{ $product->updated_at }}</td>
+                                    <td>{{ $loop->iteration}}</td>
+                                    <td>{{ $employee->emp_name }}</td>
+                                    <td>{{ $employee->emp_birthdate }}</td>
+                                    <td>{{ $employee->emp_salary }}</td>
+                                    <td>{{ $employee->department->dept_name }}</td>
+                                    <td>{{ $employee->status }}</td>
+                                    <td>{{ $employee->created_at }}</td>
+                                    <td>{{ $employee->updated_at }}</td>
                                     <td>
                                         <div class="btn-group">
-                                            <a href="{{ route('products.edit', $product->id) }}"
+                                            <a href="{{ route('employees.edit', $employee->id) }}"
                                                 class="btn btn-square btn-outline-success m-2 border-rad">
                                                 <i class="fas fa-edit"></i>
                                             </a>
-                                            <button type="button" onclick="performDestroy('{{ $product->id }}',this)"
+                                            <button type="button" onclick="performDestroy('{{ $employee->id }}',this)"
                                                 class="btn btn-square btn-outline-danger m-2 border-rad">
                                                 <i class="fas fa-trash"></i>
                                             </button>
@@ -109,7 +96,7 @@
 @section('scripts')
     <script>
         function performDestroy(id, reference) {
-            confirmDestroy('/dashboard/products', id, reference);
+            confirmDestroy('/dashboard/employees', id, reference);
         }
     </script>
 

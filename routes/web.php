@@ -2,9 +2,8 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\dashboardcontroller;
+use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ProductController;
-use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,13 +17,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::redirect('/', '/dashboard');
+Route::redirect('/', '/login');
 
-Route::middleware(['auth', 'role:admin'])->prefix('dashboard')->group(function () {
+Route::prefix('dashboard')->group(function () {
     Route::view('/', 'lgs.temp')->name('home');
-    Route::resource('/products', ProductController::class);
-    Route::resource('/users',UserController::class);
-    Route::put('/users/{user}/toggle', [UserController::class, 'toggleRole'])->name('user.toggle');
+    Route::resource('/employees',EmployeeController::class);
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 });
 

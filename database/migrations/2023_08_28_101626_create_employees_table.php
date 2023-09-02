@@ -19,10 +19,11 @@ return new class extends Migration
             $table->timestamp('emp_birthdate');
             $table->float('emp_salary');
             $table->foreignId('dept_id')->constrained('departments')->cascadeOnDelete();
-            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
+            $table->foreignId('user_id')->nullable()->constrained('users')->cascadeOnDelete();
             $table->enum('status', ['active', 'expired'])->default('active');
             $table->timestamps();
         });
+
     }
 
     /**
